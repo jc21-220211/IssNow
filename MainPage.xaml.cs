@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IssNow.api;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,16 @@ namespace IssNow
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var client = new IssApiClient();
+            IssPositionResponse result = await client.GetIssPositionAsync();
+
+            LatitudeText.Text = result.Position.Latitude;
+            LongitudeText.Text= result.Position.Longitude;
+
         }
     }
 }
